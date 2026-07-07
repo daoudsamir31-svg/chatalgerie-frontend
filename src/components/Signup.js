@@ -75,13 +75,37 @@ function Signup({ switchToLogin }) {
         <input name="phone" placeholder="📱 Téléphone (optionnel)" value={form.phone} onChange={handleChange} style={styles.input} />
 
         <div style={{ display: 'flex', gap: 10 }}>
-          <button onClick={() => setForm({ ...form, gender: 'femme' })} style={{ flex: 1, padding: 10, borderRadius: 10, background: form.gender === 'femme' ? '#FF69B4' : '#f0f0f0', color: form.gender === 'femme' ? 'white' : '#333', border: 'none', fontWeight: 'bold' }}>{t('female')}</button>
-          <button onClick={() => setForm({ ...form, gender: 'homme' })} style={{ flex: 1, padding: 10, borderRadius: 10, background: form.gender === 'homme' ? '#4A90D9' : '#f0f0f0', color: form.gender === 'homme' ? 'white' : '#333', border: 'none', fontWeight: 'bold' }}>{t('male')}</button>
+          <button 
+            onClick={() => setForm({ ...form, gender: 'femme' })} 
+            style={{ 
+              flex: 1, padding: 10, borderRadius: 10, 
+              background: form.gender === 'femme' ? 'var(--primary-teal)' : '#f0f0f0', 
+              color: form.gender === 'femme' ? 'white' : '#333', 
+              border: 'none', fontWeight: 'bold' 
+            }}
+          >
+            {t('female')}
+          </button>
+          <button 
+            onClick={() => setForm({ ...form, gender: 'homme' })} 
+            style={{ 
+              flex: 1, padding: 10, borderRadius: 10, 
+              background: form.gender === 'homme' ? 'var(--primary-dark)' : '#f0f0f0', 
+              color: form.gender === 'homme' ? 'white' : '#333', 
+              border: 'none', fontWeight: 'bold' 
+            }}
+          >
+            {t('male')}
+          </button>
         </div>
 
         {error && <p style={styles.error}>{error}</p>}
         
-        <button onClick={handleSubmit} style={styles.button} disabled={loading}>
+        <button 
+          onClick={handleSubmit} 
+          style={styles.button} 
+          disabled={loading}
+        >
           {loading ? '⏳...' : `💕 ${t('signup')}`}
         </button>
         
@@ -92,14 +116,71 @@ function Signup({ switchToLogin }) {
 }
 
 const styles = {
-  container: { display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', background: 'linear-gradient(135deg, #FFB6C1, #87CEEB)', padding: 20 },
-  card: { backgroundColor: 'white', padding: 30, borderRadius: 24, maxWidth: 400, width: '100%', textAlign: 'center' },
-  title: { fontSize: '2rem', background: 'linear-gradient(45deg, #FF69B4, #4A90D9)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' },
-  subtitle: { color: '#888', fontSize: '0.9rem', marginBottom: 15 },
-  input: { width: '100%', padding: 12, margin: '8px 0', borderRadius: 12, border: '2px solid #ddd', fontSize: '1rem', boxSizing: 'border-box' },
-  button: { width: '100%', padding: 14, background: 'linear-gradient(45deg, #FF6B6B, #FF1493)', color: 'white', border: 'none', borderRadius: 12, fontSize: '1.2rem', fontWeight: 'bold', cursor: 'pointer', marginTop: 10 },
-  link: { color: '#4A90D9', cursor: 'pointer', marginTop: 10 },
-  error: { color: 'red', fontSize: '0.9rem' },
+  container: { 
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    minHeight: '100vh', 
+    background: 'var(--gradient-main)', 
+    padding: 20 
+  },
+  card: { 
+    backgroundColor: 'white', 
+    padding: 30, 
+    borderRadius: 24, 
+    maxWidth: 400, 
+    width: '100%', 
+    textAlign: 'center' 
+  },
+  title: { 
+    fontSize: '2rem', 
+    fontWeight: 700,
+    background: 'var(--gradient-main)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+  },
+  subtitle: { 
+    color: 'var(--text-secondary)', 
+    fontSize: '0.9rem', 
+    marginBottom: 15 
+  },
+  input: { 
+    width: '100%', 
+    padding: 12, 
+    margin: '8px 0', 
+    borderRadius: 12, 
+    border: '2px solid #ddd', 
+    fontSize: '1rem', 
+    boxSizing: 'border-box',
+    outline: 'none',
+    transition: 'border-color 0.3s'
+  },
+  button: { 
+    width: '100%', 
+    padding: 14, 
+    background: 'var(--gradient-accent)', 
+    color: 'white', 
+    border: 'none', 
+    borderRadius: 12, 
+    fontSize: '1.2rem', 
+    fontWeight: 'bold', 
+    cursor: 'pointer', 
+    marginTop: 10,
+    transition: 'all 0.3s ease',
+    boxShadow: '0 4px 15px rgba(17, 153, 142, 0.4)'
+  },
+  link: { 
+    color: 'var(--primary-teal)', 
+    cursor: 'pointer', 
+    marginTop: 10,
+    fontWeight: 600,
+    transition: 'color 0.3s'
+  },
+  error: { 
+    color: '#FF6B6B', 
+    fontSize: '0.9rem' 
+  },
 };
 
 export default Signup;

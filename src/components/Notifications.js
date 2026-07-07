@@ -25,12 +25,59 @@ function Notifications({ onClose }) {
 }
 
 const styles = {
-  overlay: { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(10px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 999, padding: 20 },
-  modal: { background: 'white', borderRadius: 30, padding: 40, maxWidth: 450, width: '100%', position: 'relative' },
-  closeBtn: { position: 'absolute', top: 15, right: 20, background: 'none', border: 'none', fontSize: 30, cursor: 'pointer', color: '#999' },
-  title: { fontSize: '2rem', fontWeight: 'bold', marginBottom: 10, background: 'linear-gradient(45deg, #FF69B4, #4A90D9)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', textAlign: 'center' },
-  notification: { padding: 15, borderRadius: 12, backgroundColor: '#fafafa', marginBottom: 10, borderLeft: '4px solid #FF1493' },
-  time: { fontSize: '0.8rem', color: '#999', marginTop: 5 },
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'rgba(0,0,0,0.7)',
+    backdropFilter: 'blur(10px)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 999,
+    padding: '20px',
+  },
+  modal: {
+    background: 'white',
+    borderRadius: '30px',
+    padding: '40px',
+    maxWidth: '450px',
+    width: '100%',
+    position: 'relative',
+  },
+  closeBtn: {
+    position: 'absolute',
+    top: '15px',
+    right: '20px',
+    background: 'none',
+    border: 'none',
+    fontSize: '30px',
+    cursor: 'pointer',
+    color: '#999',
+  },
+  title: {
+    fontSize: '2rem',
+    fontWeight: 'bold',
+    marginBottom: '25px',
+    background: 'var(--gradient-main)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    textAlign: 'center',
+  },
+  notification: {
+    padding: '15px',
+    borderRadius: '12px',
+    backgroundColor: '#fafafa',
+    marginBottom: '10px',
+    borderLeft: '4px solid var(--primary-teal)',
+  },
+  time: {
+    fontSize: '0.8rem',
+    color: 'var(--text-secondary)',
+    marginTop: '5px',
+  },
 };
 
 export default Notifications;

@@ -16,63 +16,43 @@ function Swipe({
   onNearby,
   filters 
 }) {
-  // 5 رسائل مجانية
   const [messagesLeft, setMessagesLeft] = useState(5);
-  // 50 إعجاب مجاني
   const [likesLeft, setLikesLeft] = useState(50);
-  
-  // جميع المستخدمين
   const [allUsers, setAllUsers] = useState([]);
-  // المستخدمين المفلترين
   const [filteredUsers, setFilteredUsers] = useState([]);
-  // المستخدم الحالي
   const [currentUser, setCurrentUser] = useState(null);
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // تحميل المستخدمين عند بدء التشغيل
   useEffect(() => {
     const users = generateMockUsers(30);
     setAllUsers(users);
     setLoading(false);
   }, []);
 
-  // تطبيق الفلتر عند تغيير الفلتر أو المستخدمين
   useEffect(() => {
     if (allUsers.length === 0) return;
-
     let result = [...allUsers];
-
-    // فلتر الجنس (دقيق)
     if (filters?.gender) {
       result = result.filter(u => u.gender === filters.gender);
-      console.log('🔍 فلتر الجنس:', filters.gender, 'نتيجة:', result.length);
     }
-
-    // فلتر العمر
     if (filters?.ageMin) {
       result = result.filter(u => u.age >= filters.ageMin);
     }
     if (filters?.ageMax) {
       result = result.filter(u => u.age <= filters.ageMax);
     }
-
-    // فلتر المدينة
     if (filters?.city) {
       result = result.filter(u => u.city.toLowerCase() === filters.city.toLowerCase());
     }
-
     setFilteredUsers(result);
     setIndex(0);
-    
-    // إذا كانت النتيجة فارغة، استخدم الكل مع تحذير
     if (result.length === 0) {
       alert('😕 Aucun utilisateur ne correspond à vos critères. Affichage de tous les utilisateurs.');
       setFilteredUsers(allUsers);
     }
   }, [filters, allUsers]);
 
-  // تحديث المستخدم الحالي عند تغيير الفهرس أو القائمة
   useEffect(() => {
     if (filteredUsers.length > 0) {
       setCurrentUser(filteredUsers[index % filteredUsers.length]);
@@ -81,83 +61,47 @@ function Swipe({
     }
   }, [index, filteredUsers, allUsers]);
 
-  const next = () => {
-    const list = filteredUsers.length > 0 ? filteredUsers : allUsers;
-    setIndex((i) => (i + 1) % list.length);
-  };
+  const totalMessages = messagesLeft + (user?.extraMessages || 0);
+  const list = filteredUsers.length > 0 ? filteredUsers : allUsers;
+  const displayUser = currentUser || allUsers[0];
+
+  const next = () => setIndex((i) => (i + 1) % list.length);
 
   const handleLike = () => {
-    const list = filteredUsers.length > 0 ? filteredUsers : allUsers;
     const user = list[index % list.length];
-    
     if (!user) return;
-
-    // التحقق من الإعجابات
     if (likesLeft <= 0 && !isSubscribed) {
       alert('💎 Vous avez épuisé vos 50 likes gratuits. Abonnez-vous pour des likes illimités!');
       return;
     }
-
-    // التحقق من الرسائل
-    const totalMessages = messagesLeft + (user?.extraMessages || 0);
     if (totalMessages <= 0 && !isSubscribed) {
       alert('💬 Vous avez épuisé vos 5 messages gratuits. Abonnez-vous ou ajoutez des photos pour plus de messages!');
       return;
     }
-
-    // استهلاك إعجاب
     setLikesLeft(l => l - 1);
-
-    // استهلاك رسالة من الرصيد الإضافي أولاً
     if (user?.extraMessages > 0) {
-      const updatedUser = {
-        ...user,
-        extraMessages: user.extraMessages - 1
-      };
+      const updatedUser = { ...user, extraMessages: user.extraMessages - 1 };
       if (onProfile) onProfile(updatedUser);
     } else {
       setMessagesLeft((m) => m - 1);
     }
-
     alert(`❤️ Vous avez aimé ${user.name} (${likesLeft - 1} likes restants)`);
     next();
   };
 
   const handleDislike = () => {
-    const list = filteredUsers.length > 0 ? filteredUsers : allUsers;
     const user = list[index % list.length];
-    if (user) {
-      alert(`👎 Vous avez passé ${user.name}`);
-    }
+    if (user) alert(`👎 Vous avez passé ${user.name}`);
     next();
   };
 
-  // عرض حالة التحميل
   if (loading) {
-    return (
-      <div style={styles.container}>
-        <div style={styles.card}>
-          <p style={{ fontSize: '1.2rem', color: '#888' }}>⏳ Chargement des profils...</p>
-        </div>
-      </div>
-    );
+    return <div style={styles.container}><div style={styles.card}><p>⏳ Chargement...</p></div></div>;
   }
 
-  // إذا لم يكن هناك مستخدمين
-  if (!currentUser && allUsers.length === 0) {
-    return (
-      <div style={styles.container}>
-        <div style={styles.card}>
-          <p style={{ fontSize: '1.2rem', color: '#888' }}>😕 Aucun profil disponible</p>
-        </div>
-      </div>
-    );
+  if (!displayUser && allUsers.length === 0) {
+    return <div style={styles.container}><div style={styles.card}><p>😕 Aucun profil disponible</p></div></div>;
   }
-
-  // المستخدم الحالي
-  const displayUser = currentUser || allUsers[0];
-  const totalMessages = messagesLeft + (displayUser?.extraMessages || 0);
-  const list = filteredUsers.length > 0 ? filteredUsers : allUsers;
 
   return (
     <div style={styles.container}>
@@ -244,7 +188,7 @@ function Swipe({
 const styles = {
   container: {
     minHeight: '100vh',
-    background: 'linear-gradient(135deg, #FFB6C1, #87CEEB)',
+    background: 'var(--gradient-main)',
     padding: '20px',
     display: 'flex',
     flexDirection: 'column',
@@ -258,7 +202,7 @@ const styles = {
     alignItems: 'center',
     marginBottom: '10px',
     padding: '10px 15px',
-    backgroundColor: 'rgba(255,255,255,0.9)',
+    backgroundColor: 'rgba(255,255,255,0.95)',
     borderRadius: '20px',
     boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
     flexWrap: 'wrap',
@@ -266,7 +210,7 @@ const styles = {
   },
   logoIcon: {
     fontSize: '1.8rem',
-    color: '#FF1493',
+    color: 'var(--primary-teal)',
   },
   headerRight: {
     display: 'flex',
@@ -285,12 +229,12 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: '#555',
+    color: 'var(--text-primary)',
     transition: 'all 0.3s',
     boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
   },
   title: {
-    background: 'linear-gradient(45deg, #FF69B4, #4A90D9)',
+    background: 'var(--gradient-main)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     fontSize: '1.4rem',
@@ -319,11 +263,11 @@ const styles = {
   statValue: {
     fontSize: '1.1rem',
     fontWeight: 'bold',
-    color: '#333',
+    color: 'var(--text-primary)',
   },
   statLabel: {
     fontSize: '0.65rem',
-    color: '#888',
+    color: 'var(--text-secondary)',
     marginTop: '2px',
   },
   card: {
@@ -353,7 +297,7 @@ const styles = {
     position: 'absolute',
     top: '12px',
     right: '12px',
-    background: 'linear-gradient(45deg, #FFD700, #FFA500)',
+    background: 'var(--gradient-accent)',
     padding: '6px 14px',
     borderRadius: '20px',
     color: 'white',
@@ -362,7 +306,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '5px',
-    boxShadow: '0 4px 15px rgba(255,215,0,0.4)',
+    boxShadow: '0 4px 15px rgba(17, 153, 142, 0.4)',
   },
   crownIcon: {
     fontSize: '0.9rem',
@@ -374,14 +318,14 @@ const styles = {
     fontSize: '1.6rem',
     fontWeight: 'bold',
     margin: 0,
-    color: '#333',
+    color: 'var(--text-primary)',
   },
   userAge: {
-    color: '#888',
+    color: 'var(--text-secondary)',
     fontWeight: 'normal',
   },
   userCity: {
-    color: '#888',
+    color: 'var(--text-secondary)',
     fontSize: '0.95rem',
     margin: '4px 0',
   },
@@ -395,7 +339,7 @@ const styles = {
     marginTop: '8px',
     padding: '4px 12px',
     borderRadius: '12px',
-    backgroundColor: '#6C63FF',
+    backgroundColor: 'var(--primary-dark)',
     color: 'white',
     fontSize: '0.75rem',
     display: 'inline-block',
@@ -422,7 +366,7 @@ const styles = {
     justifyContent: 'center',
   },
   likeBtn: {
-    background: '#FF1493',
+    background: 'var(--gradient-accent)',
     border: 'none',
     fontSize: '28px',
     borderRadius: '50%',
@@ -431,14 +375,14 @@ const styles = {
     cursor: 'pointer',
     color: 'white',
     transition: 'all 0.3s',
-    boxShadow: '0 4px 20px rgba(255,20,147,0.3)',
+    boxShadow: '0 4px 20px rgba(17, 153, 142, 0.3)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
   premiumBtn: {
     marginTop: '20px',
-    background: 'linear-gradient(45deg, #FFD700, #FFA500)',
+    background: 'var(--gradient-accent)',
     padding: '14px 24px',
     borderRadius: '14px',
     border: 'none',
@@ -450,13 +394,13 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    boxShadow: '0 4px 20px rgba(255,215,0,0.3)',
+    boxShadow: '0 4px 20px rgba(17, 153, 142, 0.3)',
     transition: 'transform 0.2s',
   },
   addPhotoHint: {
     marginTop: '10px',
     fontSize: '0.8rem',
-    color: '#4A90D9',
+    color: 'var(--primary-teal)',
     cursor: 'pointer',
     fontWeight: '500',
   },

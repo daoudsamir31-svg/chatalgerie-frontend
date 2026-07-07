@@ -38,46 +38,26 @@ function NearbyUsers({ user, onClose, onChat }) {
 
         <div style={styles.filterContainer}>
           <label style={styles.filterLabel}>🏙️ Filtrer par ville:</label>
-          <select 
-            value={selectedCity} 
-            onChange={(e) => setSelectedCity(e.target.value)}
-            style={styles.filterSelect}
-          >
-            {algerianCities.map(city => (
-              <option key={city} value={city}>{city}</option>
-            ))}
+          <select value={selectedCity} onChange={(e) => setSelectedCity(e.target.value)} style={styles.filterSelect}>
+            {algerianCities.map(city => <option key={city} value={city}>{city}</option>)}
           </select>
         </div>
 
         <div style={styles.usersContainer}>
-          {loading ? (
-            <p style={styles.loading}>⏳ Chargement...</p>
-          ) : filteredUsers.length === 0 ? (
-            <p style={styles.empty}>😕 Aucun utilisateur en ligne dans cette région</p>
-          ) : (
-            filteredUsers.map(u => (
-              <div key={u.id} style={styles.userCard}>
-                <div style={styles.userAvatar}>
-                  <img src={u.image} alt={u.name} style={styles.avatarImage} />
-                  <span style={styles.onlineDot}></span>
-                </div>
-                <div style={styles.userInfo}>
-                  <h3 style={styles.userName}>{u.name}, {u.age}</h3>
-                  <p style={styles.userCity}>📍 {u.city}</p>
-                  <p style={styles.userBio}>{u.bio}</p>
-                </div>
-                <button 
-                  style={styles.chatBtn}
-                  onClick={() => {
-                    alert(`💬 Conversation avec ${u.name}`);
-                    if (onChat) onChat(u);
-                  }}
-                >
-                  💬
-                </button>
+          {loading ? <p style={styles.loading}>⏳ Chargement...</p> : filteredUsers.length === 0 ? <p style={styles.empty}>😕 Aucun utilisateur en ligne dans cette région</p> : filteredUsers.map(u => (
+            <div key={u.id} style={styles.userCard}>
+              <div style={styles.userAvatar}>
+                <img src={u.image} alt={u.name} style={styles.avatarImage} />
+                <span style={styles.onlineDot}></span>
               </div>
-            ))
-          )}
+              <div style={styles.userInfo}>
+                <h3 style={styles.userName}>{u.name}, {u.age}</h3>
+                <p style={styles.userCity}>📍 {u.city}</p>
+                <p style={styles.userBio}>{u.bio}</p>
+              </div>
+              <button style={styles.chatBtn} onClick={() => { alert(`💬 Conversation avec ${u.name}`); if (onChat) onChat(u); }}>💬</button>
+            </div>
+          ))}
         </div>
 
         <div style={styles.stats}>
@@ -126,7 +106,7 @@ const styles = {
   },
   title: {
     fontSize: '1.8rem',
-    background: 'linear-gradient(45deg, #FF69B4, #4A90D9)',
+    background: 'var(--gradient-main)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     marginBottom: '15px',
@@ -141,7 +121,7 @@ const styles = {
   },
   filterLabel: {
     fontWeight: 'bold',
-    color: '#555',
+    color: 'var(--text-secondary)',
   },
   filterSelect: {
     flex: 1,
@@ -162,12 +142,12 @@ const styles = {
   },
   loading: {
     textAlign: 'center',
-    color: '#888',
+    color: 'var(--text-secondary)',
     padding: '30px 0',
   },
   empty: {
     textAlign: 'center',
-    color: '#888',
+    color: 'var(--text-secondary)',
     padding: '30px 0',
     fontSize: '1.1rem',
   },
@@ -203,27 +183,12 @@ const styles = {
     borderRadius: '50%',
     border: '2px solid white',
   },
-  userInfo: {
-    flex: 1,
-  },
-  userName: {
-    margin: 0,
-    fontSize: '1.1rem',
-    color: '#333',
-  },
-  userCity: {
-    margin: '2px 0',
-    fontSize: '0.85rem',
-    color: '#888',
-  },
-  userBio: {
-    margin: '2px 0',
-    fontSize: '0.85rem',
-    color: '#666',
-    fontStyle: 'italic',
-  },
+  userInfo: { flex: 1 },
+  userName: { margin: 0, fontSize: '1.1rem', color: 'var(--text-primary)' },
+  userCity: { margin: '2px 0', fontSize: '0.85rem', color: 'var(--text-secondary)' },
+  userBio: { margin: '2px 0', fontSize: '0.85rem', color: '#666', fontStyle: 'italic' },
   chatBtn: {
-    background: '#FF1493',
+    background: 'var(--gradient-accent)',
     border: 'none',
     borderRadius: '50%',
     width: '40px',
@@ -232,6 +197,7 @@ const styles = {
     cursor: 'pointer',
     color: 'white',
     transition: 'transform 0.2s',
+    boxShadow: '0 4px 15px rgba(17, 153, 142, 0.4)',
   },
   stats: {
     marginTop: '15px',
@@ -240,7 +206,7 @@ const styles = {
     borderRadius: '12px',
     display: 'flex',
     justifyContent: 'space-between',
-    color: '#555',
+    color: 'var(--text-secondary)',
     fontWeight: 'bold',
   },
 };

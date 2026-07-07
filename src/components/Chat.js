@@ -21,7 +21,7 @@ function Chat({ user, onBack }) {
       </div>
       <div style={styles.messagesContainer}>
         {messages.length === 0 ? <p style={styles.empty}>💕 Aucun message</p> : messages.map((msg, i) => (
-          <div key={i} style={{ ...styles.message, alignSelf: msg.user === user.name ? 'flex-end' : 'flex-start', backgroundColor: msg.user === user.name ? '#FF69B4' : '#f0f0f0', color: msg.user === user.name ? 'white' : '#333' }}>
+          <div key={i} style={{ ...styles.message, alignSelf: msg.user === user.name ? 'flex-end' : 'flex-start', backgroundColor: msg.user === user.name ? 'var(--primary-teal)' : '#f0f0f0', color: msg.user === user.name ? 'white' : 'var(--text-primary)' }}>
             <p style={styles.msgName}>{msg.user}</p>
             <p>{msg.message}</p>
             <p style={styles.msgTime}>{msg.time}</p>
@@ -37,18 +37,97 @@ function Chat({ user, onBack }) {
 }
 
 const styles = {
-  container: { display: 'flex', flexDirection: 'column', minHeight: '100vh', background: 'linear-gradient(135deg, #FFB6C1, #87CEEB)', padding: 20 },
-  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 10, backgroundColor: 'white', borderRadius: 15, marginBottom: 20 },
-  backBtn: { background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: '#888' },
-  title: { fontSize: '1.5rem', background: 'linear-gradient(45deg, #FF69B4, #4A90D9)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' },
-  messagesContainer: { flex: 1, backgroundColor: 'white', borderRadius: 20, padding: 20, maxHeight: 500, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 10 },
-  empty: { textAlign: 'center', color: '#888', marginTop: 50 },
-  message: { maxWidth: '70%', padding: 12, borderRadius: 15 },
-  msgName: { fontSize: '0.8rem', fontWeight: 'bold', marginBottom: 5, color: '#666' },
-  msgTime: { fontSize: '0.7rem', color: '#999', textAlign: 'right' },
-  inputContainer: { display: 'flex', gap: 10, backgroundColor: 'white', padding: 10, borderRadius: 15, marginTop: 20 },
-  input: { flex: 1, padding: 12, borderRadius: 10, border: '2px solid #ddd', fontSize: '1rem', outline: 'none' },
-  sendBtn: { padding: '12px 20px', borderRadius: 10, border: 'none', backgroundColor: '#FF1493', color: 'white', fontSize: '1.2rem', cursor: 'pointer' },
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
+    background: 'var(--gradient-main)',
+    padding: '20px',
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '10px',
+    backgroundColor: 'white',
+    borderRadius: '15px',
+    marginBottom: '20px',
+  },
+  backBtn: {
+    background: 'none',
+    border: 'none',
+    fontSize: '1.2rem',
+    cursor: 'pointer',
+    color: 'var(--text-secondary)',
+    fontWeight: 'bold',
+  },
+  title: {
+    background: 'var(--gradient-main)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    fontSize: '1.5rem',
+    fontWeight: 700,
+  },
+  messagesContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    borderRadius: '20px',
+    padding: '20px',
+    maxHeight: '500px',
+    overflowY: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+  },
+  empty: {
+    textAlign: 'center',
+    color: 'var(--text-secondary)',
+    marginTop: '50px',
+  },
+  message: {
+    maxWidth: '70%',
+    padding: '12px',
+    borderRadius: '15px',
+  },
+  msgName: {
+    fontSize: '0.8rem',
+    fontWeight: 'bold',
+    marginBottom: '5px',
+    color: 'var(--text-secondary)',
+  },
+  msgTime: {
+    fontSize: '0.7rem',
+    color: '#999',
+    textAlign: 'right',
+  },
+  inputContainer: {
+    display: 'flex',
+    gap: '10px',
+    backgroundColor: 'white',
+    padding: '10px',
+    borderRadius: '15px',
+    marginTop: '20px',
+  },
+  input: {
+    flex: 1,
+    padding: '12px',
+    borderRadius: '10px',
+    border: '2px solid #ddd',
+    fontSize: '1rem',
+    outline: 'none',
+    transition: 'border-color 0.3s',
+  },
+  sendBtn: {
+    padding: '12px 20px',
+    borderRadius: '10px',
+    border: 'none',
+    background: 'var(--gradient-accent)',
+    color: 'white',
+    fontSize: '1.2rem',
+    cursor: 'pointer',
+    boxShadow: '0 4px 15px rgba(17, 153, 142, 0.4)',
+    transition: 'all 0.3s ease',
+  },
 };
 
 export default Chat;

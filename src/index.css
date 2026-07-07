@@ -1,0 +1,297 @@
+/* ====== index.css - الإعدادات الأساسية للتطبيق ====== */
+
+/* ====== إعادة تعيين الأنماط الافتراضية للمتصفح ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ====== إعدادات الصفحة الأساسية ====== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #F8F9FA;
+  color: #2D3748;
+}
+
+/* ====== إعدادات الكود ====== */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* ====== إعدادات الروابط ====== */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ====== إعدادات الأزرار ====== */
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ====== إعدادات حقول الإدخال ====== */
+input, textarea, select {
+  font-family: inherit;
+}
+
+/* ====== إعدادات القوائم ====== */
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ====== إعدادات الصور ====== */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ====== إعدادات التمرير ====== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8F9FA;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #11998E;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1A2A6C;
+}
+
+/* ====== إعدادات الاختيار ====== */
+::selection {
+  background-color: #11998E;
+  color: #FFFFFF;
+}
+
+/* ====== إعدادات التركيز ====== */
+:focus-visible {
+  outline: 2px solid #11998E;
+  outline-offset: 2px;
+}
+
+/* ====== إعدادات العناصر المخفية ====== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* ====== إعدادات النصوص ====== */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* ====== إعدادات المرونة ====== */
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ====== إعدادات المسافات ====== */
+.m-0 { margin: 0; }
+.m-1 { margin: 4px; }
+.m-2 { margin: 8px; }
+.m-3 { margin: 12px; }
+.m-4 { margin: 16px; }
+.m-5 { margin: 20px; }
+
+.p-0 { padding: 0; }
+.p-1 { padding: 4px; }
+.p-2 { padding: 8px; }
+.p-3 { padding: 12px; }
+.p-4 { padding: 16px; }
+.p-5 { padding: 20px; }
+
+/* ====== إعدادات العرض ====== */
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+/* ====== إعدادات الخلفيات ====== */
+.bg-white {
+  background-color: #FFFFFF;
+}
+
+.bg-light {
+  background-color: #F8F9FA;
+}
+
+.bg-primary-dark {
+  background-color: #1A2A6C;
+}
+
+.bg-primary-teal {
+  background-color: #11998E;
+}
+
+/* ====== إعدادات النصوص ====== */
+.text-white {
+  color: #FFFFFF;
+}
+
+.text-primary-dark {
+  color: #1A2A6C;
+}
+
+.text-primary-teal {
+  color: #11998E;
+}
+
+.text-secondary {
+  color: #718096;
+}
+
+/* ====== إعدادات الظلال ====== */
+.shadow-sm {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-md {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* ====== إعدادات الزوايا ====== */
+.rounded-sm {
+  border-radius: 8px;
+}
+
+.rounded-md {
+  border-radius: 12px;
+}
+
+.rounded-lg {
+  border-radius: 20px;
+}
+
+.rounded-full {
+  border-radius: 50%;
+}
+
+/* ====== إعدادات التدرجات (Gradients) ====== */
+.gradient-main {
+  background: linear-gradient(135deg, #1A2A6C, #11998E);
+}
+
+.gradient-accent {
+  background: linear-gradient(135deg, #11998E, #38EF7D);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #1A2A6C, #11998E);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ====== إعدادات الرسوم المتحركة ====== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulse {
+  animation: pulse 1.5s infinite;
+}
+
+/* ====== إعدادات الطباعة ====== */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ====== إعدادات الشاشات الصغيرة ====== */
+@media (max-width: 640px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 641px) {
+  .hide-desktop {
+    display: none !important;
+  }
+}

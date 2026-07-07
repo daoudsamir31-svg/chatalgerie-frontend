@@ -1,0 +1,139 @@
+/* ====== هوية Psy Differ (مطبقة على Chatalgerie) ====== */
+:root {
+  --primary-dark: #1A2A6C;
+  --primary-teal: #11998E;
+  --primary-neon: #38EF7D;
+  --white: #FFFFFF;
+  --gray-light: #F8F9FA;
+  --text-primary: #2D3748;
+  --text-secondary: #718096;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+  --gradient-main: linear-gradient(135deg, #1A2A6C, #11998E);
+  --gradient-accent: linear-gradient(135deg, #11998E, #38EF7D);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'Tahoma', sans-serif;
+  background-color: var(--gray-light);
+  color: var(--text-primary);
+}
+
+/* ====== خلفيات ====== */
+.bg-gradient-primary {
+  background: var(--gradient-main);
+}
+
+.bg-gradient-accent {
+  background: var(--gradient-accent);
+}
+
+/* ====== أزرار ====== */
+.btn-primary {
+  background: var(--gradient-accent);
+  color: var(--white);
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(17, 153, 142, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(17, 153, 142, 0.5);
+}
+
+.btn-secondary {
+  background: var(--primary-dark);
+  color: var(--white);
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: #0f1a4a;
+  transform: translateY(-2px);
+}
+
+/* ====== بطاقات ====== */
+.card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+/* ====== عناوين ====== */
+.title-gradient {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.title-secondary {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ====== حقول الإدخال ====== */
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.input-field:focus {
+  border-color: var(--primary-teal);
+  box-shadow: 0 0 0 3px rgba(17, 153, 142, 0.15);
+}
+
+/* ====== روابط ====== */
+.link-primary {
+  color: var(--primary-teal);
+  cursor: pointer;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.link-primary:hover {
+  color: var(--primary-dark);
+}
+
+/* ====== شارات ====== */
+.badge-premium {
+  background: var(--gradient-accent);
+  color: var(--white);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
