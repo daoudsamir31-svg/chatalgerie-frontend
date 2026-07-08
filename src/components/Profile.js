@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import LanguageSwitcher from './LanguageSwitcher';
+import DeleteAccountModal from './DeleteAccountModal';
 
 function Profile({ user, onUpdate, onBack }) {
   const [name, setName] = useState(user?.name || '');
@@ -10,6 +11,7 @@ function Profile({ user, onUpdate, onBack }) {
   const [extraMessages, setExtraMessages] = useState(user?.extraMessages || 0);
   const [imageCount, setImageCount] = useState(user?.imageCount || 0);
   const [uploadedImages, setUploadedImages] = useState(user?.uploadedImages || []);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const MAX_IMAGES = 10;
   const BONUS_MESSAGES_PER_IMAGE = 5;
@@ -87,6 +89,25 @@ function Profile({ user, onUpdate, onBack }) {
         <textarea placeholder="💕 Bio" value={bio} onChange={(e) => setBio(e.target.value)} style={styles.textarea} rows="3" />
         
         <button style={styles.saveBtn} onClick={handleSave}>💾 Enregistrer</button>
+
+        {/* ====== زر حذف الحساب ====== */}
+        <button 
+          onClick={() => setShowDeleteModal(true)} 
+          style={styles.deleteAccountBtn}
+        >
+          🗑️ Supprimer mon compte
+        </button>
+
+        {showDeleteModal && (
+          <DeleteAccountModal 
+            user={user}
+            onClose={() => setShowDeleteModal(false)}
+            onConfirm={() => {
+              setShowDeleteModal(false);
+              onBack();
+            }}
+          />
+        )}
       </div>
     </div>
   );
@@ -244,6 +265,20 @@ const styles = {
     cursor: 'pointer',
     transition: 'all 0.3s ease',
     boxShadow: '0 4px 15px rgba(17, 153, 142, 0.4)',
+  },
+  // ====== زر حذف الحساب ======
+  deleteAccountBtn: {
+    width: '100%',
+    padding: '12px',
+    marginTop: '20px',
+    borderRadius: '12px',
+    border: '2px solid #FF6B6B',
+    background: 'transparent',
+    color: '#FF6B6B',
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
   },
 };
 
